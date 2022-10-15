@@ -16,7 +16,7 @@ export const Login: FC<LoginProps> = (props) => {
 
   const { control, handleSubmit } = useForm<FormState>({
     defaultValues: {
-      email: "",
+      username: "",
       password: "",
     },
   })
