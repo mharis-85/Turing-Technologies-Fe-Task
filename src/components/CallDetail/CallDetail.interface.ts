@@ -1,8 +1,8 @@
 import { Call } from "../../services/calls"
 
-export interface AddNoteProps {
+export interface CallDetailProps {
   className?: string
-  call?: Call
+  call?: Call & { edit?: boolean }
   onCancel: (value?: Call) => void
   onSave: (value?: Call) => void
 }

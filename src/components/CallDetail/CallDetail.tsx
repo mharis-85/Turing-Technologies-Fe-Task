@@ -8,9 +8,9 @@ import { MESSAGE } from "../../constants"
 import { useAddNoteMutation } from "../../services/calls"
 import { FormField } from "../FormField"
 
-import { AddNoteProps, FormState } from "./AddNote.interface"
+import { CallDetailProps, FormState } from "./CallDetail.interface"
 
-export const AddNote: FC<AddNoteProps> = (props) => {
+export const CallDetail: FC<CallDetailProps> = (props) => {
   const { className, call, onCancel } = props
 
   const calltype = useMemo(() => {
@@ -82,18 +82,19 @@ export const AddNote: FC<AddNoteProps> = (props) => {
         </table>
       </DialogContent>
       <hr />
-      <DialogContent>
-        <AddNoteForm {...props} />
-      </DialogContent>
+      {call?.edit && (
+        <DialogContent>
+          <AddNoteForm {...props} />
+        </DialogContent>
+      )}
     </Dialog>
   )
 }
 
-
 //
 // Created Seperate component to make sure form properly resets after modal close
 //
-export const AddNoteForm = (props: AddNoteProps) => {
+export const AddNoteForm = (props: CallDetailProps) => {
   const { call, onSave: afterSave } = props
 
   const [add] = useAddNoteMutation()

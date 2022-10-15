@@ -20,7 +20,7 @@ const VISIBLE_FIELDS: (keyof Call)[] = [
 const PAGESIZE = [5, 10, 20]
 
 export const CallsContainer: FC<CallsContainerProps> = (props) => {
-  const { onEdit } = props
+  const { onEdit, onRowClick } = props
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(PAGESIZE[0])
 
@@ -123,7 +123,13 @@ export const CallsContainer: FC<CallsContainerProps> = (props) => {
       field: "notes",
       headerName: "Actions",
       renderCell: ({ row }) => (
-        <Button variant="contained" onClick={() => onEdit?.(row)}>
+        <Button
+          variant="contained"
+          onClick={(e) => {
+            e.stopPropagation()
+            onEdit?.(row)
+          }}
+        >
           Add Note
         </Button>
       ),
@@ -145,6 +151,7 @@ export const CallsContainer: FC<CallsContainerProps> = (props) => {
         loading={calls.isFetching}
         isRowSelectable={() => false}
         rows={calls.data?.nodes ?? []}
+        onRowClick={({ row }) => onRowClick?.(row)}
         columns={columns}
         components={{ Toolbar: GridToolbar }}
         componentsProps={{
