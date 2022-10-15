@@ -12,7 +12,7 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    logout: (state) => {
+    logout: (state, { payload }: PayloadAction<void>) => {
       localStorage.clear()
       sessionStorage.clear()
       return initialState
