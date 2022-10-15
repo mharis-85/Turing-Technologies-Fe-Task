@@ -8,6 +8,18 @@ export const userApi = rtkApi.injectEndpoints({
       onQueryStarted(_, { dispatch, queryFulfilled }) {
         queryFulfilled.then((response) => {
           dispatch(setAuth(response.data))
+
+          setInterval(() => {
+            dispatch(userApi.endpoints.refreshToken.initiate())
+          }, 540000) // number equal to 9 mints
+        })
+      },
+    }),
+    refreshToken: builder.mutation<AuthStore, void>({
+      query: () => ({ url: "/auth/refresh-token", method: "post" }),
+      onQueryStarted(_, { dispatch, queryFulfilled }) {
+        queryFulfilled.then((response) => {
+          dispatch(setAuth(response.data))
         })
       },
     }),
