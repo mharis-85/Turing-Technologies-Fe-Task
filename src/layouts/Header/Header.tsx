@@ -12,7 +12,7 @@ export const Header: FC<HeaderProps> = () => {
   const dispatch = useAppDispatch()
 
   return (
-    <header className="border-b-2 bg-white flex flex-wrap justify-between items-center py-4 px-4">
+    <header className="border-b-2 bg-white flex flex-wrap justify-between items-center py-4 px-4 min-h-[64px]">
       <Link to={URL_DASHBOARD}>
         <img src="/Logo.png" alt="logo" className="h-auto w-full max-h-6" />
       </Link>
