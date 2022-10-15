@@ -1,4 +1,5 @@
 import { FC, useState } from "react"
+import { CallsContainer } from "../CallsContainer"
 import { Option, Select } from "../../components/Select"
 
 import { DashboardProps } from "./Dashboard.interface"
@@ -9,7 +10,7 @@ export const Dashboard: FC<DashboardProps> = (props) => {
   const [filter, setFilter] = useState("")
 
   return (
-    <main className={`${className} bg-white flex-grow p-5 space-y-3`}>
+    <main className={`${className} bg-white flex-grow p-5 space-y-3 flex flex-col`}>
       <section>
         <h3 className="text-2xl mb-10">Turing Technologies Frontend Test</h3>
         <div className="flex items-center space-x-2">
@@ -28,6 +29,7 @@ export const Dashboard: FC<DashboardProps> = (props) => {
           </Select>
         </div>
       </section>
+      <CallsContainer />
     </main>
   )
 }
