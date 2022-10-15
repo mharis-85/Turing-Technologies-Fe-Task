@@ -32,7 +32,7 @@ axiosClient.interceptors.response.use((response: AxiosResponse<Record<any, any>>
 })
 
 axiosClient.interceptors.response.use(undefined, (error: AxiosError<Record<any, any>>) => {
-  if (Number(error.status) === 401) {
+  if (Number(error.response?.status) === 401) {
     store.dispatch(logout())
   }
 
