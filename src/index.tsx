@@ -7,6 +7,7 @@ import { Loader } from "./components/Loader"
 import { persistor, store } from "./redux"
 import reportWebVitals from "./reportWebVitals"
 import { Router } from "./router"
+import "./styles/index.scss"
 import { theme } from "./styles/MuiTheme"
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
