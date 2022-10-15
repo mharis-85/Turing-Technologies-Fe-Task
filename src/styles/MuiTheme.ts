@@ -53,5 +53,16 @@ export const theme: ThemeOptions = createTheme({
         adornedEnd: { paddingRight: ".5rem !important", "& svg": { marginLeft: ".25rem" } },
       },
     },
+    MuiButton: {
+      defaultProps: { disableElevation: true },
+      styleOverrides: {
+        root: {
+          minWidth: "unset",
+          textTransform: "inherit",
+          boxShadow: "none",
+          ":hover": { boxShadow: "none" },
+        },
+      },
+    },
   },
 } as ThemeOptions)
