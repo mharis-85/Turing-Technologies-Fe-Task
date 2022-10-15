@@ -5,10 +5,10 @@ import { themeColor } from "../../styles/MuiTheme"
 import { LoaderProps } from "./Loader.interfaces"
 
 export const Loader: FC<LoaderProps> = (props) => {
-  const { loading = true, ...rest } = props
+  const { className, loading = true, ...rest } = props
 
   return (
-    <div className="m-auto h-full flex items-center justify-center flex-col">
+    <div className={`${className} m-auto h-full flex items-center justify-center flex-col`}>
       <SlidingCubeLoader
         colors={[themeColor.primary.main, themeColor.primary.main]}
         loading={loading}

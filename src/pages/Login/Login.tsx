@@ -30,9 +30,10 @@ export const Login: FC<LoginProps> = (props) => {
   }
 
   return (
-    <section className="bg-white relative max-w-lg w-full container p-5 space-y-3 mx-auto">
+    <main className="bg-white relative max-w-lg w-full container p-5 space-y-3 mx-auto">
       <h3 className="text-2xl">Login</h3>
       <div>Please enter your details</div>
+
       <form className="space-y-5 pt-3" onSubmit={handleSubmit(onSubmit)}>
         <FormField
           control={control}
@@ -87,6 +88,6 @@ export const Login: FC<LoginProps> = (props) => {
           Log in
         </Button>
       </form>
-    </section>
+    </main>
   )
 }
