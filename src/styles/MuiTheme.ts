@@ -1,14 +1,4 @@
-import { createTheme, ThemeOptions as MuiThemeOptions } from "@mui/material"
-
-export interface ThemeOptions extends MuiThemeOptions {
-  components?: MuiThemeOptions["components"] & {
-    MuiSelect?: {
-      styleOverrides?: {
-        root?: Record<string, any>
-      }
-    }
-  }
-}
+import { createTheme, ThemeOptions } from "@mui/material"
 
 export const themeColor = {
   primary: {
@@ -47,35 +37,6 @@ export const theme: ThemeOptions = createTheme({
     ].join(","),
   },
   components: {
-    MuiInputBase: {
-      styleOverrides: {
-        inputSizeSmall: { paddingTop: ".25rem !important", paddingBottom: ".25rem !important" },
-        input: { paddingTop: ".7rem !important", paddingBottom: ".7rem !important" },
-        adornedStart: { paddingLeft: ".5rem !important", "& svg": { marginRight: ".25rem" } },
-      },
-    },
-    MuiAutocomplete: {
-      styleOverrides: {
-        inputRoot: { paddingTop: "0 !important", paddingBottom: "0 !important" },
-      },
-    },
-    MuiButton: {
-      defaultProps: { disableElevation: true },
-      styleOverrides: {
-        root: {
-          minWidth: "unset",
-          textTransform: "inherit",
-          boxShadow: "none",
-          ":hover": { boxShadow: "none" },
-        },
-      },
-    },
-    MuiChip: {
-      styleOverrides: {
-        sizeSmall: { background: "transparent" },
-        colorPrimary: { background: themeColor?.primary.main },
-      },
-    },
     MuiCard: {
       styleOverrides: {
         root: { boxShadow: "none", borderWidth: "2px", padding: "1rem" },
@@ -86,41 +47,10 @@ export const theme: ThemeOptions = createTheme({
         root: { fontSize: "inherit" },
       },
     },
-    MuiSelect: {
+    MuiInputBase: {
       styleOverrides: {
-        root: {
-          "&::before,&::after": { content: "none" },
-          background: "transparent",
-          "&:hover": {
-            background: "transparent",
-          },
-        },
-        filled: {
-          backgroundColor: "#f3f6f9",
-          margin: "0px -1px",
-          border: "1px solid #0000003b",
-          borderRadius: "4px",
-
-          // "&.MuiInputBase-sizeSmall": { height: "27.125px" },
-          // "&:not(.MuiInputBase-sizeSmall)": { height: "2.8375em" },
-          "&.Mui-focused:after": { opacity: 1 },
-          "& fieldset": { border: 0 },
-        },
-      },
-    },
-    MuiTextField: {
-      styleOverrides: {
-        root: {
-          "& .MuiFilledInput-root": {
-            backgroundColor: "#f3f6f9",
-            border: "1px solid #e0e3e7",
-            borderRadius: "4px",
-
-            "&.Mui-focused:after": { opacity: 1 },
-            "& fieldset": { border: 0 },
-            "&::before,&::after": { content: "none" },
-          },
-        },
+        adornedStart: { paddingLeft: ".5rem !important", "& svg": { marginRight: ".25rem" } },
+        adornedEnd: { paddingRight: ".5rem !important", "& svg": { marginLeft: ".25rem" } },
       },
     },
   },
