@@ -10,14 +10,14 @@ export interface Call {
   from: string // "+33173968158"
   to: string // "+33157898543"
   direction: string // "outbound"
-  call_type: string // "answered"
+  call_type: "missed" | "answered" | "voicemail" // "answered"
   via: string // "+33140208393"
   created_at: string // "2022-10-13T01:25:06.234Z"
   notes: Note[]
 }
 
-export interface CallResponse {
-  nodes: Call[]
+export interface Pagination<T> {
+  nodes: T[]
   totalCount: number // 73
   hasNextPage: boolean // true
 }

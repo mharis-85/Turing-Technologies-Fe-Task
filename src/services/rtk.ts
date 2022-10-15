@@ -5,6 +5,6 @@ import { axiosBaseQuery } from "./api"
 export const rtkApi = createApi({
   reducerPath: "rtkApi",
   baseQuery: axiosBaseQuery(),
-  tagTypes: ["user"],
+  tagTypes: ["user", "call"],
   endpoints: (builder) => ({}),
 })

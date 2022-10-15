@@ -30,7 +30,7 @@ export const Login: FC<LoginProps> = (props) => {
   }
 
   return (
-    <main className="bg-white relative max-w-lg w-full container p-5 space-y-3 mx-auto">
+    <main className="bg-white relative max-w-lg w-full container p-8 space-y-3 mx-auto">
       <h3 className="text-2xl">Login</h3>
       <div>Please enter your details</div>
 

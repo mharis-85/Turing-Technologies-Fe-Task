@@ -1,6 +1,8 @@
 import { FC, useState } from "react"
-import { CallsContainer } from "../CallsContainer"
+import { AddNote } from "../../components/AddNote"
 import { Option, Select } from "../../components/Select"
+import { Call } from "../../services/calls"
+import { CallsContainer } from "../CallsContainer"
 
 import { DashboardProps } from "./Dashboard.interface"
 
@@ -8,6 +10,7 @@ export const Dashboard: FC<DashboardProps> = (props) => {
   const { className } = props
 
   const [filter, setFilter] = useState("")
+  const [edit, setEdit] = useState<Call | undefined>(undefined)
 
   return (
     <main className={`${className} bg-white flex-grow p-5 space-y-3 flex flex-col`}>
@@ -29,7 +32,10 @@ export const Dashboard: FC<DashboardProps> = (props) => {
           </Select>
         </div>
       </section>
-      <CallsContainer />
+
+      <CallsContainer onEdit={(val) => setEdit(val)} />
+
+      <AddNote call={edit} onCancel={() => setEdit(undefined)} onSave={() => setEdit(undefined)} />
     </main>
   )
 }
