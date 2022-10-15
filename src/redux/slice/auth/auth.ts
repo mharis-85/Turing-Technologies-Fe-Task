@@ -1,9 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 import { AuthStore } from "./Auth.interface"
 
 const initialState: AuthStore = {
-  accessToken: undefined,
+  access_token: undefined,
+  refresh_token: undefined,
+  user: undefined,
 }
 
 export const authSlice = createSlice({
@@ -15,8 +17,11 @@ export const authSlice = createSlice({
       sessionStorage.clear()
       return initialState
     },
+    setAuth: (state, { payload }: PayloadAction<AuthStore>) => {
+      return { ...payload }
+    },
   },
 })
 
-export const { logout } = authSlice.actions
+export const { logout, setAuth } = authSlice.actions
 export default authSlice.reducer

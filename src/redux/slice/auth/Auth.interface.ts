@@ -1,3 +1,7 @@
+import { User } from "../../../services/user"
+
 export interface AuthStore {
-  accessToken?: string
+  access_token?: string
+  refresh_token?: string
+  user?: User
 }

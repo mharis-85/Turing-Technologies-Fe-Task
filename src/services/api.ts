@@ -3,7 +3,6 @@ import Axios, { AxiosError, AxiosRequestConfig, AxiosResponse, Method } from "ax
 
 import { store } from "../redux"
 import { logout } from "../redux/slice"
-import { Response } from "../types/Response"
 
 export const axiosClient = Axios.create({
   baseURL: process.env.REACT_APP_APIURL,
@@ -11,14 +10,14 @@ export const axiosClient = Axios.create({
 })
 
 axiosClient.interceptors.request.use((request: any) => {
-  const token = store.getState().auth.accessToken
+  const token = store.getState().auth.access_token
 
   if (token) request.headers = { ...request.headers, Authorization: `Bearer ${token}` }
 
   return request
 })
 
-axiosClient.interceptors.response.use((response: AxiosResponse<Response>) => {
+axiosClient.interceptors.response.use((response: AxiosResponse<Record<any, any>>) => {
   //
   // if response in data is string convert it to JSON
   //
@@ -32,7 +31,7 @@ axiosClient.interceptors.response.use((response: AxiosResponse<Response>) => {
   return response
 })
 
-axiosClient.interceptors.response.use(undefined, (error: AxiosError<Response>) => {
+axiosClient.interceptors.response.use(undefined, (error: AxiosError<Record<any, any>>) => {
   if (Number(error.status) === 401) {
     store.dispatch(logout())
   }
@@ -52,8 +51,8 @@ type Query = {
 
 type BaseQuery = BaseQueryFn<
   Query,
-  Response,
-  Response,
+  Record<any, any>,
+  Record<any, any>,
   extraoptions | ((value: Query) => extraoptions)
 >
 

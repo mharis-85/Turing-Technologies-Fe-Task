@@ -2,13 +2,17 @@ import { AccountCircle, Lock, Visibility, VisibilityOff } from "@mui/icons-mater
 import { Button, IconButton, TextField } from "@mui/material"
 import { FC, useState } from "react"
 import { useForm } from "react-hook-form"
+import toast from "react-hot-toast"
 
 import { FormField } from "../../components/FormField"
+import { MESSAGE } from "../../constants"
+import { useLoginMutation } from "../../services/user"
 import { FormState, LoginProps } from "./Login.interfaces"
 
 export const Login: FC<LoginProps> = (props) => {
   const [showpassword, setShowpassword] = useState(false)
 
+  const [login] = useLoginMutation()
 
   const { control, handleSubmit } = useForm<FormState>({
     defaultValues: {
@@ -18,6 +22,11 @@ export const Login: FC<LoginProps> = (props) => {
   })
 
   const onSubmit = async (value: FormState) => {
+    toast.promise(login(value).unwrap(), {
+      error: () => MESSAGE.ERROR,
+      loading: MESSAGE.LOADING,
+      success: () => "Login Successful",
+    })
   }
 
   return (
@@ -27,7 +36,7 @@ export const Login: FC<LoginProps> = (props) => {
       <form className="space-y-5 pt-3" onSubmit={handleSubmit(onSubmit)}>
         <FormField
           control={control}
-          name="email"
+          name="username"
           label="User Name"
           rules={{
             required: { message: "Value is Required", value: true },
@@ -62,7 +71,7 @@ export const Login: FC<LoginProps> = (props) => {
             size="small"
             autoComplete="current-password"
             fullWidth
-            placeholder="babayaga"
+            placeholder="Password"
             type={showpassword ? "text" : "password"}
             InputProps={{
               startAdornment: <Lock />,

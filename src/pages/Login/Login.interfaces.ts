@@ -3,6 +3,6 @@ export interface LoginProps {
 }
 
 export interface FormState {
-  email: string
+  username: string
   password: string
 }

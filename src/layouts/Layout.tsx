@@ -14,8 +14,8 @@ import { LayoutProps } from "./Layout.interfaces"
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { pathname } = useLocation()
 
-  const token = useAppSelector((store) => store.auth.accessToken)
-  const isAuthenticated = !!token
+  const user = useAppSelector((store) => store.auth.user)
+  const isAuthenticated = !!user
 
   const authenticated_route = !!matchRoutes(AUTHENTICATED_ROUTES, pathname)?.length
   const unauthenticated_route = !!matchRoutes(UNAUTHENTICATED_ROUTES, pathname)?.length
