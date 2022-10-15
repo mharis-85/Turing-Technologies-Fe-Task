@@ -17,6 +17,7 @@ module.exports = {
           800: "#0000c6",
           900: "#0000bc",
         },
+        body: "#F3EEED",
       },
     },
   },

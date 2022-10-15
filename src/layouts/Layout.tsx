@@ -26,7 +26,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   if (isAuthenticated && unauthenticated_route) return <Navigate to={URL_DASHBOARD} replace />
 
   return (
-    <div className="flex flex-col justify-between h-full min-h-screen bg-zinc-100">
+    <div className="flex flex-col justify-between h-full min-h-screen bg-body">
       {!fullPage && <Header />}
       {children(isAuthenticated)}
       {!fullPage && <Footer />}
