@@ -24,4 +24,5 @@ export const callsApi = rtkApi.injectEndpoints({
   }),
 })
 
-export const { useGetCallsQuery, useAddNoteMutation, useArchiveMutation } = callsApi
+export const { useGetCallsQuery, useLazyGetCallsQuery, useAddNoteMutation, useArchiveMutation } =
+  callsApi

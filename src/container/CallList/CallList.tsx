@@ -2,7 +2,7 @@ import { Button } from "@mui/material"
 import { DataGrid, GridColumns, GridToolbar } from "@mui/x-data-grid"
 import { intervalToDuration } from "date-fns"
 import React, { FC, useState } from "react"
-import { Call, useGetCallsQuery } from "../../services/calls"
+import { Call } from "../../services/calls"
 
 import { CallListProps } from "./CallList.interface"
 
@@ -17,14 +17,14 @@ const VISIBLE_FIELDS: (keyof Call)[] = [
   "is_archived",
   "notes",
 ]
-const PAGESIZE = [5, 10, 20]
+
+export const PAGESIZE = [5, 10, 20]
 
 export const CallList: FC<CallListProps> = (props) => {
-  const { onEdit, onRowClick, onArchive } = props
-  const [page, setPage] = useState(1)
-  const [pageSize, setPageSize] = useState(PAGESIZE[0])
+  const { onEdit, onRowClick, onArchive, className, rowsPerPageOptions = PAGESIZE, ...rest } = props
 
-  const calls = useGetCallsQuery({ limit: pageSize, offset: page * pageSize })
+  const [page, setPage] = useState(props.page ?? 0)
+  const [pageSize, setPageSize] = useState(rowsPerPageOptions[0])
 
   const col: GridColumns<Call> = [
     {
@@ -155,14 +155,11 @@ export const CallList: FC<CallListProps> = (props) => {
   )
 
   return (
-    <div className="flex-grow">
+    <div className={className}>
       <DataGrid<Call>
         autoHeight
-        loading={calls.isFetching}
         isRowSelectable={() => false}
-        rows={calls.data?.nodes ?? []}
         onRowClick={({ row }) => onRowClick?.(row)}
-        columns={columns}
         components={{ Toolbar: GridToolbar }}
         componentsProps={{
           toolbar: { showQuickFilter: true, quickFilterProps: { debounceMs: 500 } },
@@ -170,11 +167,18 @@ export const CallList: FC<CallListProps> = (props) => {
         pageSize={pageSize}
         page={page}
         paginationMode="server"
-        onPageChange={(page) => setPage(page)}
-        onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
         rowsPerPageOptions={PAGESIZE}
         pagination
-        rowCount={calls.data?.totalCount}
+        {...rest}
+        onPageChange={(page) => {
+          setPage(page)
+          props.onPageChange?.(page, pageSize)
+        }}
+        onPageSizeChange={(pageSize) => {
+          setPageSize(pageSize)
+          props.onPageChange?.(page, pageSize)
+        }}
+        columns={columns}
       />
     </div>
   )

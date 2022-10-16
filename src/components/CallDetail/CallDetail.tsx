@@ -3,9 +3,7 @@ import { Button, Dialog, DialogContent, DialogTitle, IconButton, TextField } fro
 import { intervalToDuration } from "date-fns"
 import { FC, useMemo } from "react"
 import { useForm } from "react-hook-form"
-import toast from "react-hot-toast"
-import { MESSAGE } from "../../constants"
-import { useAddNoteMutation } from "../../services/calls"
+import { Require } from "../../types/types"
 import { FormField } from "../FormField"
 
 import { CallDetailProps, FormState } from "./CallDetail.interface"
@@ -84,7 +82,7 @@ export const CallDetail: FC<CallDetailProps> = (props) => {
       <hr />
       {call?.edit && (
         <DialogContent>
-          <AddNoteForm {...props} />
+          <AddNoteForm {...props} call={call} />
         </DialogContent>
       )}
     </Dialog>
@@ -94,28 +92,17 @@ export const CallDetail: FC<CallDetailProps> = (props) => {
 //
 // Created Seperate component to make sure form properly resets after modal close
 //
-export const AddNoteForm = (props: CallDetailProps) => {
-  const { call, onSave: afterSave } = props
+export const AddNoteForm = (props: Require<CallDetailProps, "call">) => {
+  const { call, onAddNote } = props
 
-  const [add] = useAddNoteMutation()
   const { control, handleSubmit } = useForm<FormState>({
     defaultValues: {
       content: "",
     },
   })
 
-  const onSubmit = async (value: FormState) => {
-    if (call)
-      toast
-        .promise(add({ ...value, id: call?.id }).unwrap(), {
-          error: (e) => (e ? (Array.isArray(e) ? e[0].message : e.message) : MESSAGE.ERROR),
-          loading: MESSAGE.LOADING,
-          success: () => "Note Added",
-        })
-        .then(afterSave)
-  }
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
+    <form onSubmit={handleSubmit((form) => onAddNote(form.content, call))} className="space-y-10">
       <FormField
         control={control}
         name="content"
