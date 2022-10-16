@@ -16,7 +16,7 @@ export const SuccessView: FC<SuccessViewProps> = (props) => {
   return (
     <section className="bg-white flex-grow flex items-center justify-center">
       <div className="text-center  space-y-8 p-6 pb-10 container max-w-2xl">
-        <img className="h-80" src="/assets/images/done.svg" alt="Success" />
+        <img className="h-80" src="/assets/done.svg" alt="Success" />
         <div className="text-4xl font-bold">Done!</div>
         <div className="text-sm">Successfully completed this process</div>
         {actionButton}
