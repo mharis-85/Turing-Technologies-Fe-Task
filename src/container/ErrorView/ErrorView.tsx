@@ -17,7 +17,7 @@ export const ErrorView: FC<ErrorViewProps> = (props) => {
   return (
     <section className="bg-white flex-grow flex items-center justify-center">
       <div className="text-center  space-y-8 p-6 pb-10 container max-w-2xl">
-        <img className="h-80" src="/assets/images/Error.svg" alt="Error" />
+        <img className="h-80" src="/assets/error.svg" alt="Error" />
         <div className="text-4xl font-bold">{title}</div>
         <div className="md:text-lg xl:text-xl">{description}</div>
         {actionButton}

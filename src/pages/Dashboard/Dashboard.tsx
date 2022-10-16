@@ -3,13 +3,14 @@ import toast from "react-hot-toast"
 import { CallDetail } from "../../components/CallDetail"
 import { Option, Select } from "../../components/Select"
 import { MESSAGE } from "../../constants"
+import { CallList } from "../../container/CallList"
+import { ErrorView } from "../../container/ErrorView"
 import {
   Call,
   useAddNoteMutation,
   useArchiveMutation,
   useLazyGetCallsQuery,
 } from "../../services/calls"
-import { CallList } from "../CallList"
 
 import { DashboardProps } from "./Dashboard.interface"
 
@@ -25,7 +26,15 @@ export const Dashboard: FC<DashboardProps> = (props) => {
 
   useEffect(() => {
     if (calls.isUninitialized) getcalls({ limit: 5, offset: 0 })
-  }, [])
+    if (calls.isError) toast.error(calls.error.message ?? MESSAGE.ERROR)
+  }, [calls, getcalls])
+
+  if (calls.isError)
+    return (
+      <main className={`${className} bg-white flex-grow p-5 space-y-3 flex flex-col`}>
+        <ErrorView />
+      </main>
+    )
 
   const onArchive = (value: Call) => {
     toast.promise(archive(value).unwrap(), {
@@ -50,8 +59,8 @@ export const Dashboard: FC<DashboardProps> = (props) => {
     <main className={`${className} bg-white flex-grow p-5 space-y-3 flex flex-col`}>
       <section>
         <h3 className="text-2xl mb-10">Turing Technologies Frontend Test</h3>
-        // This one isnt working: how can we expect to filter on server side without querypram //
-        How ever we can filter using table on its filter
+        This one isnt working: how can we expect to filter on server side without querypram // How
+        ever we can filter using table on its filter
         <div className="flex items-center space-x-2">
           <div>Filter by: </div>
           <Select

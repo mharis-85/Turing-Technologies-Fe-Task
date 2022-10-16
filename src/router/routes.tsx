@@ -1,16 +1,7 @@
 import { RouteObject } from "react-router-dom"
-import { Dashboard } from "../container/Dashboard"
 import { NotFound } from "../container/NotFound"
+import { Dashboard } from "../pages/Dashboard"
 import { Login } from "../pages/Login"
-
-export interface RoutePram extends Record<string, string | undefined> {}
-
-export function generateRoute(url: string, prams: RoutePram = {}) {
-  return Object.entries(prams).reduce(
-    (acc, [key, value]) => acc.replace(`:${key}`, value ?? ""),
-    url
-  )
-}
 
 export interface Route extends RouteObject {
   name?: string
