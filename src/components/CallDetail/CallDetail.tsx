@@ -108,7 +108,7 @@ export const AddNoteForm = (props: CallDetailProps) => {
     if (call)
       toast
         .promise(add({ ...value, id: call?.id }).unwrap(), {
-          error: () => MESSAGE.ERROR,
+          error: (e) => (e ? (Array.isArray(e) ? e[0].message : e.message) : MESSAGE.ERROR),
           loading: MESSAGE.LOADING,
           success: () => "Note Added",
         })

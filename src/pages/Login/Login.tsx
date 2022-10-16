@@ -23,7 +23,7 @@ export const Login: FC<LoginProps> = (props) => {
 
   const onSubmit = async (value: FormState) => {
     toast.promise(login(value).unwrap(), {
-      error: () => MESSAGE.ERROR,
+      error: (e) => (e ? (Array.isArray(e) ? e[0].message : e.message) : MESSAGE.ERROR),
       loading: MESSAGE.LOADING,
       success: () => "Login Successful",
     })
