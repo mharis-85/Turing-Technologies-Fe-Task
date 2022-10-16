@@ -4,7 +4,7 @@ import { intervalToDuration } from "date-fns"
 import React, { FC, useState } from "react"
 import { Call, useGetCallsQuery } from "../../services/calls"
 
-import { CallsContainerProps } from "./CallsContainer.interface"
+import { CallListProps } from "./CallList.interface"
 
 const VISIBLE_FIELDS: (keyof Call)[] = [
   "call_type",
@@ -19,7 +19,7 @@ const VISIBLE_FIELDS: (keyof Call)[] = [
 ]
 const PAGESIZE = [5, 10, 20]
 
-export const CallsContainer: FC<CallsContainerProps> = (props) => {
+export const CallList: FC<CallListProps> = (props) => {
   const { onEdit, onRowClick } = props
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(PAGESIZE[0])
