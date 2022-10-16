@@ -17,7 +17,11 @@ export const callsApi = rtkApi.injectEndpoints({
       }),
       invalidatesTags: [{ type: "call" }],
     }),
+    archive: builder.mutation<Call, { id: Call["id"] }>({
+      query: ({ id }) => ({ url: `/calls/${id}/archive`, method: "put" }),
+      invalidatesTags: [{ type: "call" }],
+    }),
   }),
 })
 
-export const { useGetCallsQuery, useAddNoteMutation } = callsApi
+export const { useGetCallsQuery, useAddNoteMutation, useArchiveMutation } = callsApi

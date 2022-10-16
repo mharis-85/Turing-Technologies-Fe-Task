@@ -1,7 +1,7 @@
 import { FC, useState } from "react"
 import { CallDetail } from "../../components/CallDetail"
 import { Option, Select } from "../../components/Select"
-import { Call } from "../../services/calls"
+import { Call, useArchiveMutation } from "../../services/calls"
 import { CallList } from "../CallList"
 
 import { DashboardProps } from "./Dashboard.interface"
@@ -11,6 +11,7 @@ export const Dashboard: FC<DashboardProps> = (props) => {
 
   const [filter, setFilter] = useState("")
   const [selected, setSelected] = useState<(Call & { edit?: boolean }) | undefined>(undefined)
+  const [archive] = useArchiveMutation()
 
   return (
     <main className={`${className} bg-white flex-grow p-5 space-y-3 flex flex-col`}>
@@ -38,6 +39,7 @@ export const Dashboard: FC<DashboardProps> = (props) => {
       <CallList
         onEdit={(val) => setSelected({ ...val, edit: true })}
         onRowClick={(val) => setSelected({ ...val, edit: false })}
+        onArchive={(val) => archive({ id: val.id })}
       />
 
       <CallDetail

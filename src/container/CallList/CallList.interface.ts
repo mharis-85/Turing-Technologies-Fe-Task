@@ -4,4 +4,5 @@ export interface CallListProps {
   className?: string
   onEdit?: (value: Call) => void
   onRowClick?: (value: Call) => void
+  onArchive?: (value: Call) => void
 }

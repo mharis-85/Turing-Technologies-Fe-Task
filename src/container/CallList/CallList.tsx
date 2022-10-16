@@ -20,7 +20,7 @@ const VISIBLE_FIELDS: (keyof Call)[] = [
 const PAGESIZE = [5, 10, 20]
 
 export const CallList: FC<CallListProps> = (props) => {
-  const { onEdit, onRowClick } = props
+  const { onEdit, onRowClick, onArchive } = props
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(PAGESIZE[0])
 
@@ -110,9 +110,19 @@ export const CallList: FC<CallListProps> = (props) => {
       headerClassName: "bg-slate-200 uppercase font-bold",
       field: "is_archived",
       headerName: "Status",
-      renderCell: ({ value }) => {
+      renderCell: ({ value, row }) => {
         if (value) return <div className="py-2 px-5 bg-cyan-100 text-cyan-600">Archived</div>
-        return <div className="py-2 px-5 bg-slate-200">UnArchived</div>
+        return (
+          <div
+            className="py-2 px-5 bg-slate-200"
+            onClick={(e) => {
+              e.stopPropagation()
+              onArchive?.(row)
+            }}
+          >
+            UnArchived
+          </div>
+        )
       },
       sortable: true,
       flex: 1,
