@@ -113,17 +113,25 @@ export const CallList: FC<CallListProps> = (props) => {
         field: "is_archived",
         headerName: "Status",
         renderCell: ({ value, row }) => {
-          if (value) return <div className="py-2 px-5 bg-cyan-100 text-cyan-600">Archived</div>
+          if (value)
+            return (
+              <Button variant="contained" color="info" className="rounded-none" disabled>
+                Archived
+              </Button>
+            )
+
           return (
-            <div
-              className="py-2 px-5 bg-slate-200"
+            <Button
+              variant="contained"
+              color="info"
+              className="rounded-none"
               onClick={(e) => {
                 e.stopPropagation()
                 onArchive?.(row)
               }}
             >
               UnArchived
-            </div>
+            </Button>
           )
         },
         sortable: true,
