@@ -6,13 +6,7 @@ export const userApi = rtkApi.injectEndpoints({
     login: builder.mutation<AuthStore, { username: string; password: string }>({
       query: (data) => ({ url: "/auth/login", method: "post", data }),
       onQueryStarted(_, { dispatch, queryFulfilled }) {
-        queryFulfilled.then((response) => {
-          dispatch(setAuth(response.data))
-
-          setInterval(() => {
-            dispatch(userApi.endpoints.refreshToken.initiate())
-          }, 540000) // number equal to 9 mints
-        })
+        queryFulfilled.then((response) => dispatch(setAuth(response.data)))
       },
     }),
     refreshToken: builder.mutation<AuthStore, void>({
@@ -26,4 +20,4 @@ export const userApi = rtkApi.injectEndpoints({
   }),
 })
 
-export const { useLoginMutation } = userApi
+export const { useLoginMutation, useRefreshTokenMutation } = userApi
