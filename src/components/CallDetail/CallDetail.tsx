@@ -57,26 +57,38 @@ export const CallDetail: FC<CallDetailProps> = (props) => {
       <hr />
       <DialogContent>
         <table>
-          <tr>
+          <tr className="align-baseline">
             <td className="font-bold">Call type</td>
             <td>{calltype}</td>
           </tr>
-          <tr>
+          <tr className="align-baseline">
             <td className="font-bold">Duration</td>
             <td>{duration}</td>
           </tr>
-          <tr>
+          <tr className="align-baseline">
             <td className="font-bold">From</td>
             <td>{call?.from}</td>
           </tr>
-          <tr>
+          <tr className="align-baseline">
             <td className="font-bold">To</td>
             <td>{call?.to}</td>
           </tr>
-          <tr>
+          <tr className="align-baseline">
             <td className="font-bold">Via</td>
             <td>{call?.via}</td>
           </tr>
+          {!!call?.notes.length && (
+            <tr className="align-baseline">
+              <td className="font-bold">Notes</td>
+              <td className="space-y-3">
+                <ul className="list-disc ml-5">
+                  {call?.notes.map(({ content }) => (
+                    <li>{content}</li>
+                  ))}
+                </ul>
+              </td>
+            </tr>
+          )}
         </table>
       </DialogContent>
       <hr />
@@ -106,7 +118,7 @@ export const AddNoteForm = (props: Require<CallDetailProps, "call">) => {
       <FormField
         control={control}
         name="content"
-        label={<span className="font-bold">Notes</span>}
+        label={<span className="font-bold">Add Note</span>}
         rules={{
           required: { message: "Value is Required", value: true },
         }}
