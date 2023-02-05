@@ -1,33 +1,39 @@
-import { AccountCircle, Lock, Visibility, VisibilityOff } from "@mui/icons-material"
-import { Button, IconButton, TextField } from "@mui/material"
-import { FC, useState } from "react"
-import { useForm } from "react-hook-form"
-import toast from "react-hot-toast"
+import {
+  AccountCircle,
+  Lock,
+  Visibility,
+  VisibilityOff,
+} from "@mui/icons-material";
+import { Button, IconButton, TextField } from "@mui/material";
+import { FC, useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
-import { FormField } from "../../components/FormField"
-import { MESSAGE } from "../../constants"
-import { useLoginMutation } from "../../services/user"
-import { FormState, LoginProps } from "./Login.interfaces"
+import { FormField } from "../../components/FormField";
+import { MESSAGE } from "../../constants";
+import { useLoginMutation } from "../../services/user";
+import { FormState, LoginProps } from "./Login.interfaces";
 
 export const Login: FC<LoginProps> = (props) => {
-  const [showpassword, setShowpassword] = useState(false)
+  const [showpassword, setShowpassword] = useState(false);
 
-  const [login] = useLoginMutation()
+  const [login] = useLoginMutation();
 
   const { control, handleSubmit } = useForm<FormState>({
     defaultValues: {
-      username: "",
-      password: "",
+      username: "admin@turing.com",
+      password: "admin@123",
     },
-  })
+  });
 
   const onSubmit = async (value: FormState) => {
     toast.promise(login(value).unwrap(), {
-      error: (e) => (e ? (Array.isArray(e) ? e[0].message : e.message) : MESSAGE.ERROR),
+      error: (e) =>
+        e ? (Array.isArray(e) ? e[0].message : e.message) : MESSAGE.ERROR,
       loading: MESSAGE.LOADING,
       success: () => "Login Successful",
-    })
-  }
+    });
+  };
 
   return (
     <main className="bg-white relative max-w-lg w-full container p-8 space-y-3 mx-auto">
@@ -89,5 +95,5 @@ export const Login: FC<LoginProps> = (props) => {
         </Button>
       </form>
     </main>
-  )
-}
+  );
+};

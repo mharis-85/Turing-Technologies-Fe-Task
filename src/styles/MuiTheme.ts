@@ -1,8 +1,9 @@
-import { createTheme, ThemeOptions } from "@mui/material"
+import { createTheme, ThemeOptions } from "@mui/material";
 
 export const themeColor = {
   primary: {
-    main: "#0106e4",
+    main: "#4e45f7",
+    //main: "#0106e4",
     light: "#6165FE",
     dark: "#0105AC",
     "50": "#9EA0FF",
@@ -10,13 +11,14 @@ export const themeColor = {
     "200": "#6165FE",
     "300": "#383DFE",
     "400": "#1015FE",
-    "500": "#0106E4",
+    "500": "#4e45f7",
+    //"500": "#0106E4",
     "600": "#0105AC",
     "700": "#010374",
     "800": "#00023C",
     "900": "#000005",
   },
-}
+};
 
 export const theme: ThemeOptions = createTheme({
   palette: themeColor,
@@ -49,8 +51,14 @@ export const theme: ThemeOptions = createTheme({
     },
     MuiInputBase: {
       styleOverrides: {
-        adornedStart: { paddingLeft: ".5rem !important", "& svg": { marginRight: ".25rem" } },
-        adornedEnd: { paddingRight: ".5rem !important", "& svg": { marginLeft: ".25rem" } },
+        adornedStart: {
+          paddingLeft: ".5rem !important",
+          "& svg": { marginRight: ".25rem" },
+        },
+        adornedEnd: {
+          paddingRight: ".5rem !important",
+          "& svg": { marginLeft: ".25rem" },
+        },
       },
     },
     MuiButton: {
@@ -65,4 +73,4 @@ export const theme: ThemeOptions = createTheme({
       },
     },
   },
-} as ThemeOptions)
+} as ThemeOptions);
