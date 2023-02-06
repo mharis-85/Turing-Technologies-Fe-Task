@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC } from 'react'
 
 import { COMPONENT_PROPS } from "./COMPONENT_NAME.interface"
 
